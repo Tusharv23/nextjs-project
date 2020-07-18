@@ -7,7 +7,7 @@ export const authenticated = (fn: NextApiHandler) => async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
-  verify(req.headers.authorization!, "admin", async function(err, decoded) {
+  verify(req.cookies.auth!, "admin", async function(err, decoded) {
     if (!err && decoded) {
       return await fn(req, res);
     }
@@ -55,7 +55,12 @@ export default authenticated(async function getCandidate(
         req.body.image,
         req.body.created
       );
-      res.send(result.finalize());
+      result.finalize();
+      const candidate = await db.all(
+        "select * from candidate where email = ?",
+        [req.body.email]
+      );
+      res.send(candidate);
     });
   }
 
@@ -64,7 +69,8 @@ export default authenticated(async function getCandidate(
     const result = await statement.run(req.body.id);
     res.send(result.finalize());
   }
-
-  const candidate = await db.all("select * from candidate");
-  res.json(candidate);
+  if (req.method === "GET") {
+    const candidate = await db.all("select * from candidate");
+    res.json(candidate);
+  }
 });

@@ -70,7 +70,22 @@ CREATE TABLE WorkExperience
     to_ DATE,
     job_profile TEXT
 );
-
+INSERT INTO Country
+    (countryName)
+values
+    ('India');
+INSERT INTO Country
+    (countryName)
+values
+    ('Australia');
+INSERT INTO Country
+    (countryName)
+values
+    ('America');
+INSERT INTO Country
+    (countryName)
+values
+    ('England');
 -- Down
 DROP TABLE Admin;
 DROP TABLE Candidate;

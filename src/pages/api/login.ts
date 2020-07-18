@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import sqlite from "sqlite";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
+import cookie from "cookie";
 
 export default async function loginAdmin(
   req: NextApiRequest,
@@ -18,6 +19,13 @@ export default async function loginAdmin(
       if (!err && result == true) {
         const claims = { sub: admin.id };
         const jwt = sign(claims, "admin");
+        res.setHeader(
+          "set-cookie",
+          cookie.serialize("auth", jwt, {
+            httpOnly: true,
+            path: "/"
+          })
+        );
         res.json({
           authtoken: jwt
         });

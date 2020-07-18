@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { useRouter } from "next/router";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
@@ -13,12 +14,11 @@ const preventDefault = f => e => {
 };
 
 export default ({ action = "/search" }) => {
-  const router = useRouter();
   const [query, setQuery] = useState("");
 
   const handleParam = setValue => e => setValue(e.target.value);
-
   const handleSubmit = preventDefault(() => {
+    const router = useRouter();
     router.push({
       pathname: action,
       query: { q: query }

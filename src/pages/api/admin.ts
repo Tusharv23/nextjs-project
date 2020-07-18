@@ -19,6 +19,4 @@ export default async function storeAdmin(
       result.finalize();
     });
   }
-  const admin = await db.all("select * from admin where 1");
-  res.send(admin);
 }

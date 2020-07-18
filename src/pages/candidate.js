@@ -11,6 +11,7 @@ import Paper from "@material-ui/core/Paper";
 export default function Candidates({ list }) {
   return (
     <Table aria-label="simple table">
+      <a href="/candidate/signup">Add candidate</a>
       <TableHead>
         <TableRow>
           <TableCell align="right">Name</TableCell>
@@ -37,7 +38,7 @@ export default function Candidates({ list }) {
   );
 }
 Candidates.getInitialProps = async () => {
-  const resp = await fetch("http://localhost:3000/api/candidate");
+  const resp = await fetch("http://localhost:3001/api/candidate");
   const json = await resp.json();
   return { list: json };
 };
