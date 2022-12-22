@@ -16,7 +16,7 @@
     "cookie": "^0.4.1",
     "formik": "^2.1.5",
     "isomorphic-unfetch": "3.0.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "material-icon": "^0.1.4",
     "material-ui": "^0.20.2",
     "next": "^9.4.4",
